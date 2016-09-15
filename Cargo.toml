@@ -1,0 +1,6 @@
+[package]
+name = "kinder"
+version = "0.1.0"
+authors = ["Kit Freddura <kitfreddura@berkeley.edu>"]
+
+[dependencies]
