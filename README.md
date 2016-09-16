@@ -44,3 +44,18 @@ Monads have two functions, lift (normally return but return is reserved in Rust)
 Lift takes and element and "lifts" it into the Monad, for example Option::lift(2) = Some(2).
 Bind is similar to fmap except the mapping function has type: A -> M\<B> i.e i32 -> Option\<i32>.
 Bind is often implemented using flat_map.
+
+Example:
+
+```rust
+extern crate kinder;
+use kinder::lift::Monad;
+fn add_option(x: &Option<i32>, y: i32) -> Option<i32> {
+  x.bind(|elem| Some(elem+y))
+}
+
+fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
+  x.bind(|elem| add_option(y, *elem))
+}
+```
+
