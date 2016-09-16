@@ -1,6 +1,11 @@
 [package]
 name = "kinder"
 version = "0.1.0"
-authors = ["Kit Freddura <kitfreddura@berkeley.edu>"]
+authors = ["Kit Freddura <kitfreddura@gmail.com>"]
+description = "Kinder is a small crate which adds an algebraic structure to common Rust structs and emulates higher order types"
+repository="https://github.com/KitFreddura/Kinder"
+readme="./README.md"
+keywords=["higher-order types", "functor", "monad", "applicative", "semigroup", "monoid", "kinder"]
+license-file="./LICENSE.txt"
 
 [dependencies]
