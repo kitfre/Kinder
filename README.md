@@ -7,13 +7,15 @@ Kinder provides some tools and traits that functional programmers use daily.
 
 **To Do**
 
-1. Finish implementation of Monad for std::collections
+1. ~~Finish implementation of Monad for std::collections~~
 
-2. Implement Applicative for std::collections
+2. ~~Implement Applicative for std::collections~~
 
 3. Implement Traverable for std::collections
 
 4. Work on macros which make deriving these traits for custom types easy
+
+5. Figure out how to implement Applicative for structs requiring Ord or Hash (the apply method is the issue, e.g what is an ordered function?)
 
 **The Lift Module**
 
