@@ -5,3 +5,4 @@ use functor::*;
 use monoid::*;
 use semigroup::*;
 use monad::*;
+use applicative::*;

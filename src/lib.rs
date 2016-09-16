@@ -12,3 +12,4 @@ pub mod monoid;
 #[macro_use]
 pub mod semigroup;
 pub mod applicative;
+pub mod foldable;

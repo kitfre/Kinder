@@ -2,7 +2,6 @@ use lift::{Higher, Applicative};
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
-use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
 //Implementation of Applicative for Option
 impl<A,B> Applicative<A> for Option<B> {
@@ -82,4 +81,3 @@ impl<A,B> Applicative<A> for VecDeque<B> {
     }
 }
 
-//Implementation of Applicative for BinaryHeap
