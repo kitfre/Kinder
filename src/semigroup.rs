@@ -1,4 +1,3 @@
-#![allow(dead_code, unused)]
 use lift::SemiGroup;
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
@@ -76,6 +75,7 @@ impl SemiGroup for String {
         ret
     }
 }
+
 
 //Implementation for SemiGroup for HashSet
 impl<T: Clone + Hash + Eq> SemiGroup for HashSet<T> {
