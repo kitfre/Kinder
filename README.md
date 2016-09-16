@@ -25,5 +25,5 @@ makes a functor out of any lifted type which implements iter.
 Implements Monad for std::collections.
 Monads have two functions, lift (normally return but return is reserved in Rust), and bind.
 Lift takes and element and "lifts" it into the Monad, for example Option::lift(2) = Some(2).
-Bind is similar to fmap except the mapping function has type: A -> M(B) i.e i32 -> Option<i32>.
+Bind is similar to fmap except the mapping function has type: A -> M\<B> i.e i32 -> Option\<i32>.
 Bind is often implemented using flat_map.
