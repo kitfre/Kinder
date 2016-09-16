@@ -4,3 +4,4 @@ use lift::{Higher, SemiGroup, Monoid, Functor, Monad};
 use functor::*;
 use monoid::*;
 use semigroup::*;
+use monad::*;
