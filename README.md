@@ -1,9 +1,9 @@
 # Kinder
-*Algebraic structure and emulation of higher kinded types for Rust*
+*Algebraic structure and emulation of higher-order types for Rust*
 
 Kinder provides some tools and traits that functional programmers use daily.
 
-***Kinder is very much a work in progress. The idea is to make HKT's approachable to rustaceans and provide a series of macros that make implementation of custom HKTs as painless as possible***.
+***Kinder is very much a work in progress. The idea is to make HOT's approachable to rustaceans and provide a series of macros that make implementation of custom HOTs as painless as possible***.
 
 **To Do**
 
