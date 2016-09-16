@@ -65,3 +65,5 @@ fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
 }
 ```
 
+![alt text](https://mir-s3-cdn-cf.behance.net/project_modules/disp/7a455b42774743.57da548c501ce.gif "Rustaceans")
+
