@@ -5,6 +5,19 @@ use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
 use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
+//macro for making semigroups out of numerics
+#[macro_export]
+macro_rules! semigroup_num {
+    ($t:ident) => {
+        impl SemiGroup for $t {
+            type A = $t;
+            fn add(&self, b: &Self::A) -> Self::A {
+                self + b
+            }
+        }
+    }
+}
+
 //macro for making semigroups out of types that implement Extend
 #[macro_export]
 macro_rules! semigroup {
@@ -37,6 +50,20 @@ macro_rules! semigroup_ord {
         }
     }
 }
+
+//implementation for numerics
+semigroup_num!(i8);
+semigroup_num!(i16);
+semigroup_num!(i32);
+semigroup_num!(i64);
+semigroup_num!(u8);
+semigroup_num!(u16);
+semigroup_num!(u32);
+semigroup_num!(u64);
+semigroup_num!(isize);
+semigroup_num!(usize);
+semigroup_num!(f32);
+semigroup_num!(f64);
 
 //Implementataion of SemiGroup for String
 impl SemiGroup for String {
