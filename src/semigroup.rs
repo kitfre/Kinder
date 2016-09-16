@@ -1,8 +1,44 @@
 #![allow(dead_code, unused)]
-use lift::{SemiGroup};
+use lift::SemiGroup;
+use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
+use std::collections::vec_deque::VecDeque;
+use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
-//Implementataion of Monoid for String
+//macro for making semigroups out of types that implement Extend
+#[macro_export]
+macro_rules! semigroup {
+    ($t:ident) => {
+        impl<T: Clone> SemiGroup for $t<T> {
+            type A = $t<T>;
+            fn add(&self, b: &Self::A) -> Self::A {
+                let mut ret = $t::new();
+                ret.extend(self.iter().cloned());
+                ret.extend(b.iter().cloned());
+                ret
+            }
+        }
+    }
+}
+
+//macro for making semigroup out of extendable things that require ordered inputs
+//e.g BTreeSet, BinaryHeap
+#[macro_export]
+macro_rules! semigroup_ord {
+    ($t:ident) => {
+        impl<T: Clone + Ord> SemiGroup for $t<T> {
+            type A = $t<T>;
+            fn add(&self, b: &Self::A) -> Self::A {
+                let mut ret = $t::new();
+                ret.extend(self.iter().cloned());
+                ret.extend(b.iter().cloned());
+                ret
+            }
+        }
+    }
+}
+
+//Implementataion of SemiGroup for String
 impl SemiGroup for String {
     type A = String;
 
@@ -14,19 +50,32 @@ impl SemiGroup for String {
     }
 }
 
-//Implementation of SemiGroup for Vec<T>
-impl<T: Clone> SemiGroup for Vec<T> {
-    type A = Vec<T>;
+//Implementation for SemiGroup for HashSet
+impl<T: Clone + Hash + Eq> SemiGroup for HashSet<T> {
+    type A = HashSet<T>;
 
     fn add(&self, b: &Self::A) -> Self::A {
-        let mut ret = Vec::new();
+        let mut ret = HashSet::new();
         ret.extend(self.iter().cloned());
         ret.extend(b.iter().cloned());
         ret
     }
 }
 
+//Implementation of SemiGroup for Vec<T>
+semigroup!(Vec);
 
+//Implementation of SemiGroup for LinkedList<T>
+semigroup!(LinkedList);
+
+//Implementation of SemiGroup for VecDeque<T>
+semigroup!(VecDeque);
+
+//Implementation of SemiGroup for BinaryHeap<T>
+semigroup_ord!(BinaryHeap);
+
+//Implemenatation of SemiGroup for BTreeSet<T>
+semigroup_ord!(BTreeSet);
 
 #[cfg(test)]
 mod test {
