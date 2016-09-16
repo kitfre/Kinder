@@ -6,6 +6,7 @@ Kinder provides some tools and traits that functional programmers use daily.
 ***Kinder is very much a work in progress. The idea is to make HKT's approachable to rustaceans and provide a series of macros that make implementation of custom HKTs as painless as possible***.
 
 **To Do**
+
 1. Finish implementation of Monad for std::collections
 
 2. Implement Applicative for std::collections
