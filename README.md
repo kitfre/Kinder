@@ -37,6 +37,12 @@ Provides and id method for SemiGroups such that x.add(T::id()) = x.
 Implements Functor for std::collections and exports a macro functorize! which
 makes a functor out of any lifted type which implements iter.
 
+**The Applicative Module**
+
+Implements Applicative for std::collections which supplies two methods.
+Lift takes a T and raises it to be an A<T>, i.e Vec::lift(1) = vec!(1).
+Apply takes an applicative, and a lifted functions and applies it, i.e vec!(1,2).apply(vec!(|x| x+1, |x| x*x)) = vec!(2, 4).
+
 **The Monad Module**
 
 Implements Monad for std::collections.
