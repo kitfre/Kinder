@@ -62,6 +62,26 @@ impl<A, B> Monad<A> for LinkedList<B> {
     }
 }
 
+//Implementation of Monad for VecDeque
+impl<A: Clone, B: Clone> Monad<A> for VecDeque<B> {
+    fn lift(x:A) -> <Self as Higher<A>>::C {
+        let mut ret = VecDeque::new();
+        ret.push_back(x);
+        ret
+    }
+
+    fn bind<F>(&self, mut f: F) -> VecDeque<A>
+        where F: FnMut(&B) -> VecDeque<A> 
+    {
+       let mut ret = VecDeque::new();
+       let mapped = self.iter().map(f).collect::<VecDeque<VecDeque<A>>>();
+       for i in mapped {
+            ret.extend(i.iter().cloned());
+       }
+       ret
+    }
+}
+
 // Implementations of Monad for BTreeSet
 impl<A: Ord, B: Ord> Monad<A> for BTreeSet<B> {
     fn lift(x: A) -> <Self as Higher<A>>::C {
@@ -74,6 +94,20 @@ impl<A: Ord, B: Ord> Monad<A> for BTreeSet<B> {
         where F: FnMut(&B) -> BTreeSet<A>
     {
         self.iter().flat_map(f).collect::<BTreeSet<A>>()
+    }
+}
+
+impl<A: Ord, B:Ord> Monad<A> for BinaryHeap<B> {
+    fn lift(x: A) -> <Self as Higher<A>>::C {
+        let mut ret = BinaryHeap::new();
+        ret.push(x);
+        ret
+    }
+
+    fn bind<F>(&self, mut f: F) -> BinaryHeap<A> 
+        where F: FnMut(&B) -> BinaryHeap<A>
+    {
+        self.iter().flat_map(f).collect::<BinaryHeap<A>>()
     }
 }
 
