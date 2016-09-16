@@ -37,6 +37,12 @@ Provides and id method for SemiGroups such that x.add(T::id()) = x.
 Implements Functor for std::collections and exports a macro functorize! which
 makes a functor out of any lifted type which implements iter.
 
+**The Applicative Module**
+
+Implements Applicative for std::collections which supplies two methods.
+Lift takes a T and raises it to be an A<T>, i.e Vec::lift(1) = vec!(1).
+Apply takes an applicative, and a lifted functions and applies it, i.e vec!(1,2).apply(vec!(|x| x+1, |x| x*x)) = vec!(2, 4).
+
 **The Monad Module**
 
 Implements Monad for std::collections.
@@ -44,3 +50,22 @@ Monads have two functions, lift (normally return but return is reserved in Rust)
 Lift takes and element and "lifts" it into the Monad, for example Option::lift(2) = Some(2).
 Bind is similar to fmap except the mapping function has type: A -> M\<B> i.e i32 -> Option\<i32>.
 Bind is often implemented using flat_map.
+
+Example:
+
+```rust
+extern crate kinder;
+use kinder::lift::Monad;
+fn add_option(x: &Option<i32>, y: i32) -> Option<i32> {
+  x.bind(|elem| Some(elem+y))
+}
+
+fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
+  x.bind(|elem| add_option(y, *elem))
+}
+```
+
+![alt text](https://mir-s3-cdn-cf.behance.net/project_modules/disp/7a455b42774743.57da548c501ce.gif "Rustaceans")
+
+[Logo source](https://www.behance.net/gallery/42774743/Rustacean)
+
