@@ -2,7 +2,8 @@
 use lift::{Higher, Monad};
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
-use std::collections::{BTreeSet, HashSet};
+use std::collections::vec_deque::VecDeque;
+use std::collections::{BTreeSet, HashSet, BinaryHeap};
 
 // Implementation of Monad for Vec
 impl<A, B> Monad<A> for Vec<B> {
