@@ -81,7 +81,7 @@ fn squares<A: Mul<Output=A> + Clone, T: Functor<A, B=A, C=T>>(xs: &T) -> T {
 }
 
 fn main() {
-  prinln!("{:?}", squares(&vec!(1,2,3)));  //will print [1, 3, 9]
+  prinln!("{:?}", squares(&vec!(1,2,3)));  //will print [1, 4, 9]
 }
 ```
 
