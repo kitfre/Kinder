@@ -51,7 +51,7 @@ Lift takes and element and "lifts" it into the Monad, for example Option::lift(2
 Bind is similar to fmap except the mapping function has type: A -> M\<B> i.e i32 -> Option\<i32>.
 Bind is often implemented using flat_map.
 
-Example:
+Example adding options:
 
 ```rust
 extern crate kinder;
@@ -62,6 +62,26 @@ fn add_option(x: &Option<i32>, y: i32) -> Option<i32> {
 
 fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
   x.bind(|elem| add_option(y, *elem))
+}
+```
+
+Example generic square function, credit to /u/stevenportzer on reddit for debugging and making the types work,
+run with 
+```bash
+cargo run --example func-example
+```
+
+```rust 
+extern crate kinder;
+use kinder::lift::Functor;
+use std::ops::Mul;
+
+fn squares<A: Mul<Output=A> + Clone, T: Functor<A, B=A, C=T>>(xs: &T) -> T {
+  xs.fmap(|&x| x*x)
+}
+
+fn main() {
+  prinln!("{:?}", squares(&vec!(1,2,3)));  //will print [1, 4, 9]
 }
 ```
 
