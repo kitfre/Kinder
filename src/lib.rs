@@ -6,7 +6,7 @@ pub mod lift;
 pub mod monad;
 #[macro_use]
 pub mod functor;
-pub mod prelude;
+
 #[macro_use]
 pub mod monoid;
 #[macro_use]
