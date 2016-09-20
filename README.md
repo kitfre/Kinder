@@ -11,7 +11,7 @@ Kinder provides some tools and traits that functional programmers use daily.
 
 2. ~~Implement Applicative for std::collections~~
 
-3. Implement Traverable for std::collections
+3. Implement Traverable for std::collections (~~implement Foldable first~~)
 
 4. Work on macros which make deriving these traits for custom types easy
 
@@ -32,6 +32,11 @@ Provides a method add which takes two items of the same type and returns an elem
 Implements Monoid for std::collections as well as String.
 Provides and id method for SemiGroups such that x.add(T::id()) = x.
 
+**The Foldable Module**
+
+Implements Foldable for std::collections. Provides a method foldr which takes a starting value and a function and 
+folds the Foldable using the function. See examples for more information.
+
 **The Functor Module**
 
 Implements Functor for std::collections and exports a macro functorize! which
@@ -51,18 +56,29 @@ Lift takes and element and "lifts" it into the Monad, for example Option::lift(2
 Bind is similar to fmap except the mapping function has type: A -> M\<B> i.e i32 -> Option\<i32>.
 Bind is often implemented using flat_map.
 
-Example adding options:
+Example generic summing of Vectors:
 
 ```rust
 extern crate kinder;
-use kinder::lift::Monad;
-fn add_option(x: &Option<i32>, y: i32) -> Option<i32> {
-  x.bind(|elem| Some(elem+y))
+use kinder::lift::{Foldable, Monoid, SemiGroup};
+
+fn sum_foldable<B: SemiGroup<A=B> + Monoid<A=B>, T: Foldable<A=B>>(xs : &T) -> B
+{
+  xs.foldr(B::id(), |x, y| x.add(y))
 }
 
-fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
-  x.bind(|elem| add_option(y, *elem))
+fn main() {
+  let ints = vec!(1,2,3);
+  let floats = vec!(1.0,2.0,3.0);
+  let strings = vec!(String::from("Hello"), String::from(", "), String::from("World!"));
+  println!("{}", sum_foldable(&ints)); //prints 6
+  println!("{}", sum_foldable(&floats)); //prints 6
+  println!("{}", sum_foldable(&strings)); //prints "Hello, World!"
 }
+```
+Run this example with:
+```bash
+cargo run --example fold-example
 ```
 
 Example generic square function, credit to /u/stevenportzer on reddit for debugging and making the types work,
