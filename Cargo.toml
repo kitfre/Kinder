@@ -1,6 +1,6 @@
 [package]
 name = "kinder"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Kit Freddura <kitfreddura@gmail.com>"]
 description = "Kinder is a small crate which adds an algebraic structure to common Rust structs and emulates higher order types"
 repository="https://github.com/KitFreddura/Kinder"
