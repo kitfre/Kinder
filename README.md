@@ -33,6 +33,7 @@ Implements Monoid for std::collections as well as String.
 Provides and id method for SemiGroups such that x.add(T::id()) = x.
 
 **The Foldable Module**
+
 Implements Foldable for std::collections. Provides a method foldr which takes a starting value and a function and 
 folds the Foldable using the function. See examples for more information.
 
