@@ -1,4 +1,3 @@
-#![allow(dead_code, unused)]
 use lift::{Higher, Functor};
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
@@ -6,6 +5,7 @@ use std::collections::vec_deque::VecDeque;
 use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
 /// A quick macro to functorize types implement Iter
+#[macro_export]
 macro_rules! functorize {
     ($t:ident) => {
         impl<A,B> Functor<A> for $t<B> {

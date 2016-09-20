@@ -1,4 +1,5 @@
 #![allow(dead_code, unused)]
+#![feature(type_ascription)]
 use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
 use std::collections::{BinaryHeap, BTreeSet, HashSet};
@@ -43,6 +44,12 @@ pub trait SemiGroup {
 ///id: &self -> A
 pub trait Monoid : SemiGroup {
     fn id() -> Self::A;
+}
+
+pub trait Foldable  {
+    type A; //accumulator type
+    fn foldr<F>(&self, accum: Self::A, f: F) -> Self::A
+        where F: FnMut(Self::A, &Self::A) -> Self::A;
 }
 
 /// functor trait, similar to Haskell's functor class

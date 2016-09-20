@@ -1,4 +1,3 @@
-#![allow(dead_code, unused)]
 use lift::{Higher, Monad};
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;

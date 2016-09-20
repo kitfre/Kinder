@@ -1,4 +1,3 @@
-#![allow(dead_code, unused)]
 use lift::{SemiGroup, Monoid};
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
