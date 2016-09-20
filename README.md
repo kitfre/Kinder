@@ -59,14 +59,24 @@ Example generic summing of Vectors:
 
 ```rust
 extern crate kinder;
-use kinder::lift::Monad;
-fn add_option(x: &Option<i32>, y: i32) -> Option<i32> {
-  x.bind(|elem| Some(elem+y))
+use kinder::lift::{Foldable, Monoid, SemiGroup};
+
+fn sum_foldable<B: SemiGroup<A=B> + Monoid<A=B>, T: Foldable<A=B>>(xs : &T) -> B
+{
+  xs.foldr(B::id(), |x, y| x.add(y))
 }
 
-fn add_options(x: &Option<i32>, y: &Option<i32>) -> Option<i32> {
-  x.bind(|elem| add_option(y, *elem))
+fn main() {
+  let ints = vec!(1,2,3);
+  let floats = vec!(1.0,2.0,3.0);
+  let strings = vec!(String::from("Hello"), String::from(", "), String::from("World!"));
+  println!("{}", sum_foldable(&ints)); //prints 6
+  println!("{}", sum_foldable(&floats)); //prints 6
+  println!("{}", sum_foldable(&strings)); //prints "Hello, World!"
 }
+```
+```bash
+run with cargo run --example fold-example
 ```
 
 Example generic square function, credit to /u/stevenportzer on reddit for debugging and making the types work,
