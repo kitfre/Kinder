@@ -76,8 +76,9 @@ fn main() {
   println!("{}", sum_foldable(&strings)); //prints "Hello, World!"
 }
 ```
+Run this example with:
 ```bash
-run with cargo run --example fold-example
+cargo run --example fold-example
 ```
 
 Example generic square function, credit to /u/stevenportzer on reddit for debugging and making the types work,
