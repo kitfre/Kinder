@@ -1,4 +1,7 @@
 # Kinder
+
+[![Build Status](https://travis-ci.org/KitFreddura/Kinder.svg?branch=master)](https://travis-ci.org/KitFreddura/Kinder)
+
 *Algebraic structure and emulation of higher-order types for Rust*
 
 Kinder provides some tools and traits that functional programmers use daily.
