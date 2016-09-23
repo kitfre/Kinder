@@ -2,7 +2,7 @@ use lift::Foldable;
 use std::hash::Hash;
 use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
-use std::collections::{BTreeSet, HashSet};
+use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
 ///macro to implement fold for iterables (they already have fold defined)
 #[macro_export]
@@ -28,6 +28,16 @@ foldable!(LinkedList);
 //Implementation of Foldable for VeqDeque
 foldable!(VecDeque);
 
+//Implemenatation of Foldable for BinaryHeap
+impl<T: Ord> Foldable for BinaryHeap<T> {
+    type A = T;
+    fn foldr<F>(&self, accum: Self::A, f: F) -> Self::A
+        where F: FnMut(Self::A, &Self::A) -> Self::A
+    {
+        self.iter().fold(accum, f)
+    }
+}
+
 //Implementation of Foldable for BTreeSet
 impl<T: Ord> Foldable for BTreeSet<T> {
     type A = T;
@@ -47,3 +57,4 @@ impl<T: Hash + Eq> Foldable for HashSet<T> {
         self.iter().fold(accum, f)
     }
 }
+
