@@ -5,7 +5,7 @@ use std::collections::vec_deque::VecDeque;
 
 //Implementation of Applicative for Option
 impl<A,B> Applicative<A> for Option<B> {
-    fn lift(x:A) -> <Self as Higher<A>>::C {
+    fn raise(x:A) -> <Self as Higher<A>>::C {
         Some(x)
     }
 
@@ -24,7 +24,7 @@ impl<A,B> Applicative<A> for Option<B> {
 
 //Implementation of Applicative for Vec
 impl<A,B> Applicative<A> for Vec<B> {
-    fn lift(x:A) -> <Self as Higher<A>>::C {
+    fn raise(x:A) -> <Self as Higher<A>>::C {
         vec!(x)
     }
 
@@ -38,7 +38,7 @@ impl<A,B> Applicative<A> for Vec<B> {
 
 //Implementation of Applicative for LinkedList
 impl<A,B> Applicative<A> for LinkedList<B> {
-    fn lift(x:A) -> <Self as Higher<A>>::C {
+    fn raise(x:A) -> <Self as Higher<A>>::C {
         let mut ret = LinkedList::new();
         ret.push_back(x);
         ret
@@ -54,7 +54,7 @@ impl<A,B> Applicative<A> for LinkedList<B> {
 
 //Implemenation of Applicative for Box
 impl<A,B> Applicative<A> for Box<B> {
-    fn lift(x:A) -> <Self as Higher<A>>::C {
+    fn raise(x:A) -> <Self as Higher<A>>::C {
         Box::new(x)
     }
 
@@ -67,7 +67,7 @@ impl<A,B> Applicative<A> for Box<B> {
 
 //Implementation of Applicative for VecDeque
 impl<A,B> Applicative<A> for VecDeque<B> {
-    fn lift(x:A) -> <Self as Higher<A>>::C {
+    fn raise(x:A) -> <Self as Higher<A>>::C {
         let mut ret = VecDeque::new();
         ret.push_back(x);
         ret

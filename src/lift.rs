@@ -62,10 +62,10 @@ pub trait Functor<A>: Higher<A> {
 
 ///applicative trait, similar to Haskell's applicative class
 ///requires two functions:
-///lift (normally pure): lifts a B to an A<B> i.e Option::lift(2) = Some(2)
+///raise (normally pure): lifts a B to an A<B> i.e Option::lift(2) = Some(2)
 ///apply (<*> in haskell): applies an applicative functor i.e Some(2).apply(Some(f)) => Some(f(2))
 pub trait Applicative<A> : Higher<A> {
-    fn lift(x: A) -> Self::C where Self: Higher<A, B=A>;
+    fn raise(x: A) -> Self::C where Self: Higher<A, B=A>;
     fn apply<F>(&self, <Self as Higher<F>>::C) -> <Self as Higher<A>>::C where F: Fn(&<Self as Higher<A>>::B) -> A, Self: Higher<F>; //kinda ugly
 }
 
