@@ -8,6 +8,8 @@ Kinder provides some tools and traits that functional programmers use daily.
 
 ***Kinder is very much a work in progress. The idea is to make HOT's approachable to rustaceans and provide a series of macros that make implementation of custom HOTs as painless as possible***.
 
+Updates: Moved all macros to lift.rs for ease of use.
+
 **To Do**
 
 1. ~~Finish implementation of Monad for std::collections~~
