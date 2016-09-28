@@ -77,3 +77,114 @@ pub trait Monad<A>: Higher<A> {
     fn lift(x: A) -> Self::C where Self: Higher<A, B = A>;
     fn bind<F>(&self, F) -> Self::C where F: FnMut(&Self::B) -> Self::C;
 }
+
+//macros
+//
+///A quick macro to functorize types implementing Iter
+#[macro_export]
+macro_rules! functorize {
+    ($t:ident) => {
+        impl<A,B> Functor<A> for $t<B> {
+            fn fmap<F>(&self, f:F) -> $t<A> where F: Fn(&B) -> A {
+                self.iter().map(f).collect::<$t<A>>()
+            }
+        }
+    }
+}
+
+///A macro to implement monoid for numeric semigroups
+#[macro_export]
+macro_rules! monoid_num {
+    ($t:ident, $z:expr) => {
+        impl Monoid for $t {
+            fn id() -> Self::A {
+                $z
+            }
+        }
+    }
+}
+
+///A macro to implement monoid for Semigroups which have a new method
+#[macro_export]
+macro_rules! monoid {
+    ($t:ident) => {
+        impl<T: Clone> Monoid for $t<T> {
+            fn id() -> Self::A {
+                $t::new()
+            }
+        }
+    }
+}
+
+///Macro to implement ordered SemiGroups like BTreeSet which have a new method
+#[macro_export]
+macro_rules! monoid_ord {
+    ($t:ident) => {
+        impl<T: Clone + Ord> Monoid for $t<T> {
+            fn id() -> Self::A {
+                $t::new()
+            }
+        }
+    }
+}
+
+
+///Macro to implement fold for iterables
+#[macro_export]
+macro_rules! foldable {
+    ($t:ident) => {
+        impl<T> Foldable for $t<T> {
+            type A = T;
+            fn foldr<F>(&self, accum: Self::A, f: F) -> Self::A
+                where F: FnMut(Self::A, &Self::A) -> Self::A
+            {
+                self.iter().fold(accum, f)
+            }
+        }
+    }
+}
+
+///Macro to implement semigroup for numerics
+#[macro_export]
+macro_rules! semigroup_num {
+    ($t:ident) => {
+        impl SemiGroup for $t {
+            type A = $t;
+            fn add(&self, b: &Self::A) -> Self::A {
+                self + b
+            }
+        }
+    }
+}
+
+///Macro for implementing SemiGroup for types that implement Extend
+#[macro_export]
+macro_rules! semigroup {
+    ($t:ident) => {
+        impl<T: Clone> SemiGroup for $t<T> {
+            type A = $t<T>;
+            fn add(&self, b: &Self::A) -> Self::A {
+                let mut ret = $t::new();
+                ret.extend(self.iter().cloned());
+                ret.extend(b.iter().cloned());
+                ret
+            }
+        }
+    }
+}
+
+///A macro for implementing SemiGroups for types that need Ord and implement Extended
+#[macro_export]
+macro_rules! semigroup_ord {
+    ($t:ident) => {
+        impl<T: Clone + Ord> SemiGroup for $t<T> {
+            type A = $t<T>;
+            fn add(&self, b: &Self::A) -> Self::A {
+                let mut ret = $t::new();
+                ret.extend(self.iter().cloned());
+                ret.extend(b.iter().cloned());
+                ret
+            }
+        }
+    }
+}

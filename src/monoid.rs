@@ -4,43 +4,6 @@ use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
 use std::collections::{BTreeSet, HashSet, BinaryHeap};
 
-
-//macro to implement monoid for numeric semigroups
-#[macro_export]
-macro_rules! monoid_num {
-    ($t:ident, $z:expr) => {
-        impl Monoid for $t {
-            fn id() -> Self::A {
-                $z
-            }
-        }
-    }
-}
-
-//macro to implement monoid for SemiGroups like Vec which have a new method
-#[macro_export]
-macro_rules! monoid {
-    ($t:ident) => {
-        impl<T: Clone> Monoid for $t<T> {
-            fn id() -> Self::A {
-                $t::new()
-            }
-        }
-    }   
-}
-
-//macro to implement monoid for ordered SemiGroups like BTreeSet which have a new method
-#[macro_export]
-macro_rules! monoid_ord {
-    ($t:ident) => {
-        impl<T: Clone + Ord> Monoid for $t<T> {
-            fn id() -> Self::A {
-                $t::new()
-            }
-        }
-    }   
-}
-
 //Implementation for numeric Monoids
 monoid_num!(i8, 0);
 monoid_num!(i16, 0);

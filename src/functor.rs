@@ -4,18 +4,6 @@ use std::collections::linked_list::LinkedList;
 use std::collections::vec_deque::VecDeque;
 use std::collections::{BinaryHeap, BTreeSet, HashSet};
 
-/// A quick macro to functorize types implement Iter
-#[macro_export]
-macro_rules! functorize {
-    ($t:ident) => {
-        impl<A,B> Functor<A> for $t<B> {
-            fn fmap<F>(&self, f:F) -> $t<A> where F: Fn(&B) -> A {
-                self.iter().map(f).collect::<$t<A>>()
-            }
-        }
-    }
-}
-
 // Implementation of Functor for Option
 impl<A, B> Functor<A> for Option<B> {
     fn fmap<F>(&self, f: F) -> Option<A>
