@@ -24,8 +24,8 @@ impl SemiGroup for String {
 
     fn add(&self, b: &Self::A) -> Self::A {
         let mut ret = String::from("");
-        ret.push_str(&self);
-        ret.push_str(&b);
+        ret.push_str(self);
+        ret.push_str(b);
         ret
     }
 }

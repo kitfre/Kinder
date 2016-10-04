@@ -31,7 +31,7 @@ lift!(BTreeSet);
 lift!(VecDeque);
 lift!(HashSet);
 
-///SemiGroup trait
+///`SemiGroup` trait
 ///requires one function:
 ///add: &self -> &A -> A
 pub trait SemiGroup {
@@ -39,40 +39,43 @@ pub trait SemiGroup {
     fn add(&self, b: &Self::A) -> Self::A;
 }
 
-///monoid trait
+///`Monoid` trait
 ///requires one function:
 ///id: &self -> A
 pub trait Monoid : SemiGroup {
     fn id() -> Self::A;
 }
 
+///`Foldable` trait
+///requires an accumulator type `A`
+///a function foldr: &self -> `Self::A` `f: F` -> `Self::A`
 pub trait Foldable  {
     type A; //accumulator type
     fn foldr<F>(&self, accum: Self::A, f: F) -> Self::A
         where F: FnMut(Self::A, &Self::A) -> Self::A;
 }
 
-/// functor trait, similar to Haskell's functor class
-/// requires a function fmap of type: &self -> Fn(&Self::B) -> A
-/// e.g Some(2).fmap(|x| x*x) = Some(4)
-/// None.fmap(|x| x*x) = None
+/// `Functor` trait, similar to Haskell's functor class
+/// requires a function fmap of type: &self -> Fn(`&Self::B`) -> A
+/// e.g `Some(2).fmap(|x| x*x) = Some(4)`
+/// `None.fmap(|x| x*x) = None`
 pub trait Functor<A>: Higher<A> {
     fn fmap<F>(&self, f: F) -> Self::C where F: Fn(&Self::B) -> A;
 }
 
-///applicative trait, similar to Haskell's applicative class
+///`Applicative` trait, similar to Haskell's applicative class
 ///requires two functions:
-///raise (normally pure): lifts a B to an A<B> i.e Option::lift(2) = Some(2)
-///apply (<*> in haskell): applies an applicative functor i.e Some(2).apply(Some(f)) => Some(f(2))
+///raise (normally pure): lifts a B to an A<B> i.e `Option::lift(2) = Some(2)`
+///apply (<*> in haskell): applies an applicative functor i.e `Some(2).apply(Some(f)) = Some(f(2))`
 pub trait Applicative<A> : Higher<A> {
     fn raise(x: A) -> Self::C where Self: Higher<A, B=A>;
     fn apply<F>(&self, <Self as Higher<F>>::C) -> <Self as Higher<A>>::C where F: Fn(&<Self as Higher<A>>::B) -> A, Self: Higher<F>; //kinda ugly
 }
 
-/// monad trait, similar to Haskell's monad class
+/// `Monad trait`, similar to Haskell's monad class
 /// requires two functions:
-/// lift (usually return but return is reserved): lifts an B to an A<B>, i.e Option::return(2) = Some(2)
-/// bind: maps an A<B> to an A<C> i.e Some(2).bind(|x| Some(x+1)) = Some(3)
+/// lift (usually return but return is reserved): lifts an B to an A<B>, i.e `Option::lift(2) = Some(2)`
+/// bind: maps an A<B> to an A<C> i.e `Some(2).bind(|x| Some(x+1)) = Some(3)`
 pub trait Monad<A>: Higher<A> {
     fn lift(x: A) -> Self::C where Self: Higher<A, B = A>;
     fn bind<F>(&self, F) -> Self::C where F: FnMut(&Self::B) -> Self::C;
