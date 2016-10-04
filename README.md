@@ -1,5 +1,6 @@
 # Kinder
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://webhooks.gitter.im/e/27c540666cef05ec0eaa)
 [![Build Status](https://travis-ci.org/KitFreddura/Kinder.svg?branch=master)](https://travis-ci.org/KitFreddura/Kinder)
 
 *Algebraic structure and emulation of higher-order types for Rust*
