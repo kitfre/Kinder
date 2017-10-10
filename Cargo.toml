@@ -9,4 +9,4 @@ keywords=["functor", "monad", "applicative", "monoid", "kinder"]
 license-file="./LICENSE.txt"
 
 [dependencies]
-
+kinder-derive = { path = "./kinder-derive" }
