@@ -5,7 +5,7 @@
 
 *Algebraic structure and emulation of higher-order types for Rust*
 
-***Note to Reader: Anyone interested in the name or taking ownership of Kinder, please get in touch. Obviously, Kinder hasn't been updated in some time, against my better wishes. Unfortunately I haven't had as much time as I'd hoped to devote to the project, and if anyone is interested, please don't hesitate to reach out.***
+***Note to Reader: Anyone interested in the name or taking ownership of Kinder, please get in touch. Obviously, Kinder hasn't been updated in some time- unfortunately I haven't had as much time as I'd hoped to devote to the project, and if anyone is interested please don't hesitate to reach out.***
 
 Kinder provides some tools and traits that functional programmers use daily.
 
