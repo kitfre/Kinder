@@ -5,6 +5,8 @@
 
 *Algebraic structure and emulation of higher-order types for Rust*
 
+***Note to Reader: Anyone interested in the name or taking ownership of Kinder, please get in touch. Obviously, Kinder hasn't been updated in some time, against my better wishes. Unfortunately I haven't had as much time as I'd hoped to devote to the project, and if anyone is interested, please don't hesitate to reach out.***
+
 Kinder provides some tools and traits that functional programmers use daily.
 
 ***Kinder is very much a work in progress. The idea is to make HOT's approachable to rustaceans and provide a series of macros that make implementation of custom HOTs as painless as possible***.
@@ -107,7 +109,4 @@ fn main() {
 }
 ```
 
-![alt text](https://mir-s3-cdn-cf.behance.net/project_modules/disp/7a455b42774743.57da548c501ce.gif "Rustaceans")
-
-[Logo source](https://www.behance.net/gallery/42774743/Rustacean)
 
